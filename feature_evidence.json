@@ -1,0 +1,190 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-member-management-system-that-stores-and-displays-up-to-26-members-with-their-name-mobile-number-joining-date-and-profile-photo-admin-should-be-able-to-add-new-members-by-entering-name-and-mobile-number",
+      "featureTitle": "Create a member management system that stores and displays up to 26 members with their name, mobile number, joining date, and profile photo. Admin should be able to add new members by entering name and mobile number.",
+      "files": [
+        "frontend/src/components/AddMemberForm.tsx",
+        "frontend/src/components/MemberCard.tsx",
+        "frontend/src/components/MemberList.tsx",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-monthly-installment-tracking-system-where-each-member-pays-1000-per-month-system-should-track-which-member-paid-payment-date-amount-and-calculate-total-collected-amount",
+      "featureTitle": "Implement monthly installment tracking system where each member pays ₹1000 per month. System should track which member paid, payment date, amount, and calculate total collected amount.",
+      "files": [
+        "frontend/src/components/PaymentHistory.tsx",
+        "frontend/src/components/RecordPaymentForm.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-individual-member-detail-pages-accessible-by-clicking-on-any-member-from-the-list-each-page-should-display-member-s-name-mobile-number-joining-date-profile-photo-total-installments-paid-current-balance-and-payment-history",
+      "featureTitle": "Create individual member detail pages accessible by clicking on any member from the list. Each page should display member's name, mobile number, joining date, profile photo, total installments paid, current balance, and payment history.",
+      "files": [
+        "frontend/src/pages/MemberDetail.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-login-system-using-mobile-number-as-username-and-last-4-digits-of-mobile-number-as-password-admin-mobile-number-is-9315341037-with-admin-password-1311",
+      "featureTitle": "Build a login system using mobile number as username and last 4 digits of mobile number as password. Admin mobile number is 9315341037 with admin password 1311.",
+      "files": [
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/LoginPage.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-admin-panel-accessible-only-to-admin-9315341037-that-shows-list-of-all-members-allows-adding-new-members-and-displays-summary-statistics-including-total-members-total-amount-collected-and-recent-payments",
+      "featureTitle": "Implement admin panel accessible only to admin (9315341037) that shows list of all members, allows adding new members, and displays summary statistics including total members, total amount collected, and recent payments.",
+      "files": [
+        "frontend/src/components/SummaryStats.tsx",
+        "frontend/src/pages/AdminPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-bilingual-interface-supporting-both-hindi-and-english-languages-with-a-language-toggle-switch-all-ui-text-labels-buttons-and-messages-should-be-translatable-between-hindi-and-english",
+      "featureTitle": "Create bilingual interface supporting both Hindi and English languages with a language toggle switch. All UI text, labels, buttons, and messages should be translatable between Hindi and English.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AddMemberForm.tsx",
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/LanguageToggle.tsx",
+        "frontend/src/components/LoginPage.tsx",
+        "frontend/src/components/MemberList.tsx",
+        "frontend/src/components/PaymentHistory.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/components/RecordPaymentForm.tsx",
+        "frontend/src/components/SummaryStats.tsx",
+        "frontend/src/contexts/LanguageContext.tsx",
+        "frontend/src/hooks/useTranslation.ts",
+        "frontend/src/i18n/translations.ts",
+        "frontend/src/pages/AdminPanel.tsx",
+        "frontend/src/pages/MemberDetail.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-payment-qr-code-upi-id-9315341037-ybl-on-payment-page-for-members-to-scan-and-make-payments-show-qr-code-image-prominently-with-upi-id-text-below-it",
+      "featureTitle": "Display payment QR code (UPI ID: 9315341037@ybl) on payment page for members to scan and make payments. Show QR code image prominently with UPI ID text below it.",
+      "files": [
+        "frontend/src/components/PaymentQRCode.tsx",
+        "frontend/src/pages/MemberDetail.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-creative-and-cohesive-visual-design-theme-for-the-banking-app-that-uses-warm-trustworthy-colors-avoid-blue-and-purple-unless-specifically-chosen-clear-typography-suitable-for-financial-data-and-a-clean-layout-that-emphasizes-readability-and-ease-of-navigation-for-both-hindi-and-english-text",
+      "featureTitle": "Implement a creative and cohesive visual design theme for the banking app that uses warm, trustworthy colors (avoid blue and purple unless specifically chosen), clear typography suitable for financial data, and a clean layout that emphasizes readability and ease of navigation for both Hindi and English text.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

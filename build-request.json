@@ -1,0 +1,184 @@
+{
+  "kind": "build_request",
+  "title": "Build simplified group banking app with member management and installment tracking",
+  "projectName": "Group Banking",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a member management system that stores and displays up to 26 members with their name, mobile number, joining date, and profile photo. Admin should be able to add new members by entering name and mobile number.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "ग्रुप मेंबर्स मैनेजमेंट - 26 मेंबर्स। एडमिन नए मेंबर्स जोड़/हटा सकता है"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System can store up to 26 members with name, mobile number, joining date, and profile photo",
+        "Admin can add new members by providing name and mobile number",
+        "System automatically sets joining date when member is added",
+        "Each member has a unique identifier"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement monthly installment tracking system where each member pays ₹1000 per month. System should track which member paid, payment date, amount, and calculate total collected amount.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "₹1000 मासिक किश्त"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System records installment payments of ₹1000 per member per month",
+        "Each payment records member ID, date, and amount",
+        "System calculates total amount collected from all members",
+        "Payment history is visible for each member"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create individual member detail pages accessible by clicking on any member from the list. Each page should display member's name, mobile number, joining date, profile photo, total installments paid, current balance, and payment history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "हर मेंबर का अलग पेज: जमा किश्त"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking a member opens their individual detail page",
+        "Page displays member name, mobile number, joining date, and profile photo",
+        "Page shows total number of installments paid and total amount",
+        "Page displays chronological payment history with dates and amounts"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build a login system using mobile number as username and last 4 digits of mobile number as password. Admin mobile number is 9315341037 with admin password 1311.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "लॉगिन मोबाइल नंबर से। पासवर्ड: आखिरी 4 डिजिट। एडमिन: 9315341037। एडमिन पासवर्ड: 1311"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can login using their 10-digit mobile number",
+        "Password is automatically the last 4 digits of mobile number for regular members",
+        "Admin mobile number 9315341037 uses password 1311 instead of last 4 digits",
+        "System validates credentials and grants appropriate access level",
+        "Invalid credentials show error message"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement admin panel accessible only to admin (9315341037) that shows list of all members, allows adding new members, and displays summary statistics including total members, total amount collected, and recent payments.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "एडमिन पैनल - एडमिन: 9315341037"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin panel is accessible only when logged in as admin (9315341037)",
+        "Panel displays list of all 26 members with their basic info",
+        "Panel includes form to add new members",
+        "Panel shows summary stats: total members, total collected amount, recent activity",
+        "Regular members cannot access admin panel"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create bilingual interface supporting both Hindi and English languages with a language toggle switch. All UI text, labels, buttons, and messages should be translatable between Hindi and English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "ऐप हिंदी/इंग्लिश में"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Language toggle switch is visible on all pages",
+        "All UI elements including labels, buttons, headings, and messages support both languages",
+        "Language preference persists across sessions",
+        "Default language can be set based on browser/system settings"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Display payment QR code (UPI ID: 9315341037@ybl) on payment page for members to scan and make payments. Show QR code image prominently with UPI ID text below it.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "QR कोड: 9315341037@ybl"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Payment page displays QR code for UPI ID 9315341037@ybl",
+        "QR code is prominently visible and scannable",
+        "UPI ID text 9315341037@ybl is displayed below QR code",
+        "QR code can be generated or embedded as static image"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement a creative and cohesive visual design theme for the banking app that uses warm, trustworthy colors (avoid blue and purple unless specifically chosen), clear typography suitable for financial data, and a clean layout that emphasizes readability and ease of navigation for both Hindi and English text.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App uses a consistent color scheme throughout that feels trustworthy for financial transactions",
+        "Typography is clear and legible for both Hindi and English text",
+        "Layout emphasizes clean organization with clear hierarchy",
+        "Design feels professional and appropriate for a banking application"
+      ]
+    }
+  ],
+  "constraints": [
+    "Maximum 26 members can be managed in the system",
+    "Monthly installment amount is fixed at ₹1000 per member",
+    "Admin mobile number is 9315341037 with password 1311",
+    "Regular member passwords are always last 4 digits of their mobile number",
+    "UPI payment QR code must use ID 9315341037@ybl",
+    "App should not be designed for Google Play Store upload"
+  ],
+  "nonGoals": [
+    "Loan system with interest and EMI calculations (deferred to next phase)",
+    "Penalty system for late payments (deferred to next phase)",
+    "Profit distribution among members and admin (deferred to next phase)",
+    "Transaction history starting from specific date September 10, 2025 (deferred to next phase)",
+    "Defaulter list functionality (deferred to next phase)",
+    "Edit and delete capabilities for admin (deferred to next phase)",
+    "Advanced member removal functionality (deferred to next phase)",
+    "Loan request and recall features (deferred to next phase)"
+  ],
+  "imageRequirements": {
+    "required": [
+      "QR code image for UPI payment with ID 9315341037@ybl, clean white background with black QR pattern (payment-qr.dim_300x300.png)",
+      "Default profile placeholder avatar icon in neutral colors for members without photos (default-avatar.dim_128x128.png)"
+    ],
+    "edits": []
+  }
+}

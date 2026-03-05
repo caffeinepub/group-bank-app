@@ -1,0 +1,295 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Group Banking App Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create member management UI with admin capability to add members and display member list with profile photos",
+      "acceptanceCriteria": [
+        "System can store up to 26 members with name, mobile number, joining date, and profile photo",
+        "Admin can add new members by providing name and mobile number",
+        "System automatically sets joining date when member is added",
+        "Each member has a unique identifier"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useMembers.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for member operations: useGetAllMembers() to fetch member list, useAddMember() mutation to add new members. Wire these to backend methods getAllMembers() and addMember(). Use the authorization component to ensure admin-only access for add operations."
+        },
+        {
+          "path": "frontend/src/components/MemberCard.tsx",
+          "operation": "create",
+          "description": "Create reusable member card component displaying member name, mobile number, joining date, and profile photo. Use the blob-storage component to render profile photos via ExternalBlob.getDirectURL(). If profilePhoto is undefined, display the generated default avatar image at frontend/public/assets/generated/default-avatar.dim_128x128.png. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/MemberList.tsx",
+          "operation": "create",
+          "description": "Create member list component that fetches and displays all members using useGetAllMembers() hook. Render each member using MemberCard component. Make each card clickable to navigate to member detail page. Include loading and error states."
+        },
+        {
+          "path": "frontend/src/components/AddMemberForm.tsx",
+          "operation": "create",
+          "description": "Create admin-only form component for adding new members with fields for name and mobile number. Use useAddMember() mutation hook. Include form validation for mobile number format (10 digits). Show success/error feedback. Use the authorization component to verify admin access before rendering. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "create",
+          "description": "Create admin panel page that displays MemberList component and AddMemberForm component. Use the authorization component to verify admin-only access with useInternetIdentity() hook and check isCallerAdmin(). Show access denied screen if user is not admin. Include summary statistics section that will be populated in REQ-5. Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement payment tracking UI where members can view payments and admin can record ₹1000 installments",
+      "acceptanceCriteria": [
+        "System records installment payments of ₹1000 per member per month",
+        "Each payment records member ID, date, and amount",
+        "System calculates total amount collected from all members",
+        "Payment history is visible for each member"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePayments.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for payment operations: useGetPayments(memberId) to fetch payment history for a member, useRecordPayment() mutation to record new payments. Wire these to backend methods getPayments() and recordPayment(). Use the authorization component for admin-only access to record payment mutation."
+        },
+        {
+          "path": "frontend/src/components/PaymentHistory.tsx",
+          "operation": "create",
+          "description": "Create payment history component that displays chronological list of payments for a member. Accept memberId as prop and use useGetPayments(memberId) hook. Display payment date and amount for each payment. Format currency as ₹. Include empty state when no payments exist."
+        },
+        {
+          "path": "frontend/src/components/RecordPaymentForm.tsx",
+          "operation": "create",
+          "description": "Create admin-only form component to record payments. Accept memberId as prop. Pre-fill amount field with ₹1000. Allow admin to modify amount if needed. Use useRecordPayment() mutation. Show success/error feedback. Use the authorization component to verify admin access. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create individual member detail pages showing profile, payment history, and balance information",
+      "acceptanceCriteria": [
+        "Clicking a member opens their individual detail page",
+        "Page displays member name, mobile number, joining date, and profile photo",
+        "Page shows total number of installments paid and total amount",
+        "Page displays chronological payment history with dates and amounts"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useMemberBalance.ts",
+          "operation": "create",
+          "description": "Create React Query hook useGetMemberBalance(memberId) to fetch member balance data including totalPaid and paymentCount. Wire to backend method getMemberBalance()."
+        },
+        {
+          "path": "frontend/src/pages/MemberDetail.tsx",
+          "operation": "create",
+          "description": "Create member detail page that accepts memberId from route params. Fetch member data using useGetMember(memberId), balance using useGetMemberBalance(memberId), and display PaymentHistory component. Show profile photo using blob-storage component via ExternalBlob.getDirectURL() or default avatar at frontend/public/assets/generated/default-avatar.dim_128x128.png. Display name, mobile, joining date, total installments paid, and total amount. Include RecordPaymentForm for admin users. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useMember.ts",
+          "operation": "create",
+          "description": "Create React Query hook useGetMember(memberId) to fetch individual member details. Wire to backend method getMember()."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build login UI using mobile number authentication with Internet Identity integration",
+      "acceptanceCriteria": [
+        "Users can login using their 10-digit mobile number",
+        "Password is automatically the last 4 digits of mobile number for regular members",
+        "Admin mobile number 9315341037 uses password 1311 instead of last 4 digits",
+        "System validates credentials and grants appropriate access level",
+        "Invalid credentials show error message"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginPage.tsx",
+          "operation": "create",
+          "description": "Create login page component using Internet Identity authentication via useInternetIdentity() hook from the authorization component. Display login button that triggers login() method. After successful login, check if user profile exists using getCallerUserProfile(). If no profile exists, show profile setup modal asking for name and mobile number. Handle authentication errors gracefully. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create modal component for first-time profile setup shown after login when user has no profile. Collect name and mobile number (10 digits). Use saveCallerUserProfile() to save profile. Follow the authorization component's pattern to prevent modal flash by checking isAuthenticated && !profileLoading && isFetched && userProfile === null. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "create",
+          "description": "Create header component with login/logout button using the authorization component's LoginButton pattern. Show user name from getCallerUserProfile() when authenticated. Include language toggle switch placeholder (will be wired in REQ-6). Display logout button that calls clear() and queryClient.clear() on click. Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement admin panel UI with member list, add member form, and summary statistics",
+      "acceptanceCriteria": [
+        "Admin panel is accessible only when logged in as admin (9315341037)",
+        "Panel displays list of all 26 members with their basic info",
+        "Panel includes form to add new members",
+        "Panel shows summary stats: total members, total collected amount, recent activity",
+        "Regular members cannot access admin panel"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSummaryStats.ts",
+          "operation": "create",
+          "description": "Create React Query hook useGetSummaryStats() to fetch summary statistics including totalMembers and totalAmountCollected. Wire to backend method getSummaryStats()."
+        },
+        {
+          "path": "frontend/src/components/SummaryStats.tsx",
+          "operation": "create",
+          "description": "Create summary statistics component displaying total members count, total amount collected formatted as ₹, and member count limit (26). Use useGetSummaryStats() hook. Display stats in card layout with clear labels."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Modify admin panel page created in REQ-1 to include SummaryStats component at the top. Ensure authorization check using isCallerAdmin() from the authorization component. Show AccessDeniedScreen for non-admin users. Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create bilingual interface with Hindi/English language toggle and translations for all UI elements",
+      "acceptanceCriteria": [
+        "Language toggle switch is visible on all pages",
+        "All UI elements including labels, buttons, headings, and messages support both languages",
+        "Language preference persists across sessions",
+        "Default language can be set based on browser/system settings"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/i18n/translations.ts",
+          "operation": "create",
+          "description": "Create translation file with nested objects for Hindi (hi) and English (en) containing all UI text, labels, buttons, headings, error messages, and form labels used throughout the app. Include translations for member management, payments, admin panel, login, and all page content."
+        },
+        {
+          "path": "frontend/src/contexts/LanguageContext.tsx",
+          "operation": "create",
+          "description": "Create language context provider that manages current language state (hi or en), provides translation function t(key), and persists language preference to localStorage. Initialize with browser language detection falling back to English."
+        },
+        {
+          "path": "frontend/src/hooks/useTranslation.ts",
+          "operation": "create",
+          "description": "Create useTranslation hook that consumes LanguageContext and returns current language, setLanguage function, and t() translation function for accessing translations by key path."
+        },
+        {
+          "path": "frontend/src/components/LanguageToggle.tsx",
+          "operation": "create",
+          "description": "Create language toggle switch component that displays current language (हिंदी/English) and allows switching between Hindi and English. Use useTranslation hook to access setLanguage function. Style as a toggle switch or button."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Modify Header component created in REQ-4 to include LanguageToggle component. Replace all hardcoded text with t() translation function calls using useTranslation hook."
+        },
+        {
+          "path": "frontend/src/pages/MemberDetail.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in MemberDetail page with t() translation function calls using useTranslation hook. Apply to labels, headings, buttons, and messages."
+        },
+        {
+          "path": "frontend/src/pages/AdminPanel.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in AdminPanel page with t() translation function calls using useTranslation hook. Apply to labels, headings, buttons, and messages."
+        },
+        {
+          "path": "frontend/src/components/LoginPage.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in LoginPage component with t() translation function calls using useTranslation hook. Apply to labels, headings, buttons, and messages."
+        },
+        {
+          "path": "frontend/src/components/AddMemberForm.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in AddMemberForm with t() translation function calls using useTranslation hook. Apply to form labels, placeholders, buttons, and validation messages."
+        },
+        {
+          "path": "frontend/src/components/MemberList.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in MemberList with t() translation function calls using useTranslation hook. Apply to headings, empty states, and error messages."
+        },
+        {
+          "path": "frontend/src/components/PaymentHistory.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in PaymentHistory with t() translation function calls using useTranslation hook. Apply to headings, labels, and empty states."
+        },
+        {
+          "path": "frontend/src/components/RecordPaymentForm.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in RecordPaymentForm with t() translation function calls using useTranslation hook. Apply to form labels, buttons, and messages."
+        },
+        {
+          "path": "frontend/src/components/SummaryStats.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in SummaryStats with t() translation function calls using useTranslation hook. Apply to stat labels and headings."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "modify",
+          "description": "Replace all hardcoded text in ProfileSetupModal with t() translation function calls using useTranslation hook. Apply to modal title, form labels, buttons, and messages."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the app content with LanguageContext.Provider to make translations available throughout the app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Display UPI payment QR code on payment page with UPI ID prominently shown",
+      "acceptanceCriteria": [
+        "Payment page displays QR code for UPI ID 9315341037@ybl",
+        "QR code is prominently visible and scannable",
+        "UPI ID text 9315341037@ybl is displayed below QR code",
+        "QR code can be generated or embedded as static image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PaymentQRCode.tsx",
+          "operation": "create",
+          "description": "Create payment QR code component that displays the generated QR code image located at frontend/public/assets/generated/payment-qr.dim_300x300.png. Display the image prominently centered with alt text. Show UPI ID text '9315341037@ybl' below the QR code in large, copyable text. Add copy-to-clipboard button for UPI ID. Use translations for labels."
+        },
+        {
+          "path": "frontend/src/pages/MemberDetail.tsx",
+          "operation": "modify",
+          "description": "Add PaymentQRCode component to the member detail page in a prominent section. Show QR code alongside or above the RecordPaymentForm for admin users, or as the primary payment method for regular members."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Implement creative visual design theme with warm trustworthy colors, clear typography, and clean layout for bilingual content",
+      "acceptanceCriteria": [
+        "App uses a consistent color scheme throughout that feels trustworthy for financial transactions",
+        "Typography is clear and legible for both Hindi and English text",
+        "Layout emphasizes clean organization with clear hierarchy",
+        "Design feels professional and appropriate for a banking application"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define design system using CSS custom properties for warm, trustworthy color palette (consider amber/orange/teal tones avoiding blue/purple). Set up typography scale with clear font sizing for headings and body text that works well for both Hindi Devanagari and Latin scripts. Define spacing scale, border radius tokens, and shadow utilities. Ensure high contrast ratios for accessibility."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom colors for the banking app (warm trustworthy palette like amber, orange, teal). Configure font families that support both Devanagari (Hindi) and Latin (English) characters well. Set up custom spacing, border radius, and shadow values that support the design theme. Ensure theme colors are semantic (primary, secondary, success, warning, error)."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create main layout component that wraps all pages with consistent header, navigation, and footer structure. Apply background colors and spacing from design theme. Include Header component. Set up responsive grid/flex containers for clean page organization."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all routes with Layout component to apply consistent design theme across all pages. Ensure LanguageContext.Provider wraps Layout."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Group banking app with member management, installment tracking (₹1000/month), loan system (2% interest, 1-3 EMI repayment, limit 2x deposits), penalty system (₹10/day after 12th), admin panel (mobile: 9315341037), login via mobile number (password: last 4 digits, admin password: 1311), payment QR code (9315341037@ybl), transaction history from Sept 10, 2025, profile photos, defaulter list, Hindi/English language support, not for Play Store upload",
+  "architectural_notes": [
+    "Admin mobile number: 9315341037",
+    "Admin password: 1311",
+    "Payment QR: 9315341037@ybl",
+    "26 member capacity",
+    "New members get share based on profit and joining date",
+    "Admin gets effort share but no installment payment",
+    "Loan limit: 2x deposits, 50% of previous loan must be paid before new loan",
+    "App not intended for Google Play Store"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- QR code image for UPI payment with ID 9315341037@ybl, clean white background with black QR pattern (payment-qr.dim_300x300.png)\n- Default profile placeholder avatar icon in neutral colors for members without photos (default-avatar.dim_128x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-member-management-system-that-stores-and-displays-up-to-26-members-with-their-name-mobile-number-joining-date-and-profile-photo-admin-should-be-able-to-add-new-members-by-entering-name-and-mobile-number",
+      "title": "Create a member management system that stores and displays up to 26 members with their name, mobile number, joining date, and profile photo. Admin should be able to add new members by entering name and mobile number.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-monthly-installment-tracking-system-where-each-member-pays-1000-per-month-system-should-track-which-member-paid-payment-date-amount-and-calculate-total-collected-amount",
+      "title": "Implement monthly installment tracking system where each member pays ₹1000 per month. System should track which member paid, payment date, amount, and calculate total collected amount.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-individual-member-detail-pages-accessible-by-clicking-on-any-member-from-the-list-each-page-should-display-member-s-name-mobile-number-joining-date-profile-photo-total-installments-paid-current-balance-and-payment-history",
+      "title": "Create individual member detail pages accessible by clicking on any member from the list. Each page should display member's name, mobile number, joining date, profile photo, total installments paid, current balance, and payment history.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-login-system-using-mobile-number-as-username-and-last-4-digits-of-mobile-number-as-password-admin-mobile-number-is-9315341037-with-admin-password-1311",
+      "title": "Build a login system using mobile number as username and last 4 digits of mobile number as password. Admin mobile number is 9315341037 with admin password 1311.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-admin-panel-accessible-only-to-admin-9315341037-that-shows-list-of-all-members-allows-adding-new-members-and-displays-summary-statistics-including-total-members-total-amount-collected-and-recent-payments",
+      "title": "Implement admin panel accessible only to admin (9315341037) that shows list of all members, allows adding new members, and displays summary statistics including total members, total amount collected, and recent payments.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-bilingual-interface-supporting-both-hindi-and-english-languages-with-a-language-toggle-switch-all-ui-text-labels-buttons-and-messages-should-be-translatable-between-hindi-and-english",
+      "title": "Create bilingual interface supporting both Hindi and English languages with a language toggle switch. All UI text, labels, buttons, and messages should be translatable between Hindi and English.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-payment-qr-code-upi-id-9315341037-ybl-on-payment-page-for-members-to-scan-and-make-payments-show-qr-code-image-prominently-with-upi-id-text-below-it",
+      "title": "Display payment QR code (UPI ID: 9315341037@ybl) on payment page for members to scan and make payments. Show QR code image prominently with UPI ID text below it.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-creative-and-cohesive-visual-design-theme-for-the-banking-app-that-uses-warm-trustworthy-colors-avoid-blue-and-purple-unless-specifically-chosen-clear-typography-suitable-for-financial-data-and-a-clean-layout-that-emphasizes-readability-and-ease-of-navigation-for-both-hindi-and-english-text",
+      "title": "Implement a creative and cohesive visual design theme for the banking app that uses warm, trustworthy colors (avoid blue and purple unless specifically chosen), clear typography suitable for financial data, and a clean layout that emphasizes readability and ease of navigation for both Hindi and English text.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Member management system for 26 members with add/remove capability",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Monthly installment tracking system (₹1000 per member)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Loan system with 2% interest, 1-3 EMI repayment, limit 2x deposits",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Penalty system: ₹10/day after 12th, distributed among members and admin",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Individual member detail pages with installments, earnings, loan info, due dates",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Admin panel with edit/delete capabilities for installments and EMI",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Login system via mobile number, password last 4 digits, admin password 1311",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Payment QR code integration (9315341037@ybl) with automatic total calculation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Transaction history from September 10, 2025",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Loan request and recall functionality with detailed loan information",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Profile photo upload and defaulter list visibility",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Hindi/English bilingual interface",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Group Banking App",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
